@@ -37,34 +37,31 @@ app.post("/api/posts", (req, res, next) => {
     content:req.body.content
   });
   console.log(post);
-  post.save();
-  res.status(201).json({
-    message: 'Post added successfully'
+  post.save().then((createdPost) => {
+    res.status(201).json({
+      message: 'Post added successfully',
+      postId: createdPost._id
+    });
   });
 });
 
 app.get("/api/posts", (req, res, next) => {
-  // const posts = [
-  //   {
-  //     id: "fadf12421l",
-  //     title: "First server-side post",
-  //     content: "This is coming from the server"
-  //   },
-  //   {
-  //     id: "ksajflaj132",
-  //     title: "Second server-side post",
-  //     content: "This is coming from the server!"
-  //   }
-  // ];
-
-  Post.find().then((documents) => {
-    console.log(documents);
+    Post.find().then((documents) => {
     res.status(200).json({
       message: "Posts fetched successfully!",
       posts: documents
     });
   });
+});
 
+app.delete("/api/post/:id", (req, res, next) => {
+  console.log(req.params.id);
+  Post.deleteOne({ _id: req.params.id}).then((result) => {
+    console.log(result)
+    res.status(200).json({
+      message: "Post deleted!"
+    });
+  });
 });
 
 module.exports = app;

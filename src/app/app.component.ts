@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
@@ -15,7 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule, 
     PostCreateComponent, 
     PostListComponent,
-    HttpClientModule
+    HttpClientModule,
+    RouterOutlet, 
+    RouterLink, 
+    RouterLinkActive
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
